@@ -1,0 +1,3 @@
+patchedDependencies:
+  '@simform_solutions/react-native-audio-waveform': patches/@simform_solutions__react-native-audio-waveform.patch
+  react-native-css-interop: patches/react-native-css-interop.patch

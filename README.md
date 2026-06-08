@@ -1,6 +1,6 @@
 # 📱 Offline Mobile Text-to-Speech (TTS) with QVAC
 
-An Expo/React Native companion application demonstrating high-fidelity, private, completely offline Text-to-Speech (TTS) powered by the [QVAC SDK](https://docs.qvac.tether.io/). 
+An Expo/React Native companion application demonstrating high-fidelity, private, completely offline Text-to-Speech (TTS) powered by the [QVAC SDK](https://docs.qvac.tether.io/).
 
 This project is the complete codebase for the guide: **"How to Run Private Text-to-Speech on Your Own Hardware Using QVAC"**.
 
@@ -37,6 +37,7 @@ graph TD
 ### 📋 Prerequisites
 
 To run this application locally on physical devices or simulators, you need:
+
 - **macOS** (for iOS builds/simulator)
 - **Xcode** and/or **Android Studio**
 - **Node.js** (v18+)
@@ -45,6 +46,7 @@ To run this application locally on physical devices or simulators, you need:
 ### 📥 Installation & Build
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/DjibrilM/offline-mobile-tts.git
    cd offline-mobile-tts
@@ -52,30 +54,35 @@ To run this application locally on physical devices or simulators, you need:
 
 2. **Configure Package Manager Hoisting**
    Because QVAC native peer dependencies require a flat `node_modules` structure, make sure your `.npmrc` has hoisting enabled:
+
    ```ini
    shamefully-hoist=true
    ```
 
 3. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 4. **Generate Native Directories & Prebuild**
    Generate the native iOS and Android projects using Expo Prebuild:
+
    ```bash
    npx expo prebuild
    ```
 
 5. **Run the App**
    To compile and run the application on your connected device or simulator:
-   
+
    **For iOS:**
+
    ```bash
    pnpm ios
    ```
-   
+
    **For Android:**
+
    ```bash
    pnpm android
    ```
@@ -102,11 +109,11 @@ To run this application locally on physical devices or simulators, you need:
 
 ## ⚙️ How it Works under the Hood
 
-1. **WAV Packaging (`src/lib/utils.ts`):** 
+1. **WAV Packaging (`src/lib/utils.ts`):**
    Since media players cannot play raw digital PCM samples directly, a helper utility constructs a standard 44-byte RIFF WAVE header and prefixes it to the buffer before saving to the sandbox.
-2. **Context Flushing:** 
+2. **Context Flushing:**
    To prevent voice deterioration (hallucinations) during back-to-back synthesis, the active model is explicitly unloaded and hot-reloaded to ensure a completely clean context window.
-3. **Interactive Audio Visuals:** 
+3. **Interactive Audio Visuals:**
    Uses `@simform_solutions/react-native-audio-waveform` to read the locally written WAV file and render an interactive waveform representation.
 
 ---
@@ -114,4 +121,3 @@ To run this application locally on physical devices or simulators, you need:
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](file:///Users/jibm/Desktop/projects/qvac-course-projects/offline-mobile-tts/LICENSE) file for details.
-# QVAC-TTS-Expo-Implementation

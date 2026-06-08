@@ -1,0 +1,27 @@
+diff --git a/ios/AudioPlayer.swift b/ios/AudioPlayer.swift
+index e171eb6681a0b9893648c4e747e0e1379a369016..b69a13a6050dd13f73d699479614c369de27c035 100644
+--- a/ios/AudioPlayer.swift
++++ b/ios/AudioPlayer.swift
+@@ -39,8 +39,8 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
+       }
+      
+       do {
+-        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+-        try AVAudioSession.sharedInstance().setActive(true)
++        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
++        try? AVAudioSession.sharedInstance().setActive(true)
+         player = try AVAudioPlayer(contentsOf: audioUrl!)
+         player?.prepareToPlay()
+         player?.volume = Float(volume ?? 100.0)
+diff --git a/lib/components/Waveform/Waveform.js b/lib/components/Waveform/Waveform.js
+index d6086fcc901240175f2c2087039d658b44e25869..0f39c28af7cb0316394d5c8eb9f5f0ad7992ad42 100644
+--- a/lib/components/Waveform/Waveform.js
++++ b/lib/components/Waveform/Waveform.js
+@@ -381,6 +381,7 @@ export const Waveform = forwardRef((props, ref) => {
+             }
+         });
+         const tracePlaybackValue = onCurrentDuration(data => {
++            if (!isAudioPlaying.current) return;
+             if (data.playerKey === `PlayerFor${path}`) {
+                 const currentAudioDuration = Number(data.currentDuration);
+                 if (!isNaN(currentAudioDuration)) {
